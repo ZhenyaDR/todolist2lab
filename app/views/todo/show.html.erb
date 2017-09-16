@@ -1,0 +1,55 @@
+﻿<% provide(:title, 'Категории') %>
+<h1>Мои задачи</h1>
+
+      <a href="#" id="showus">
+				<%= image_tag("addTodoIcon.png")%>
+		</a>
+    <%@proj.each do |cat| %>
+
+<p>
+
+      <h1><%=cat.title %></h1>
+
+
+
+
+
+<%       Todo.where(project_id:cat.id).each do |tod|  %>
+ 
+      <ul>
+	  <li><%= tod.text%></li>
+   </ul>
+
+</p>
+
+
+<% end %>
+
+
+<% end %>
+
+<div id="forma" hidden><h1>Новая задача</h1>
+  <div class="form">
+    <%@todo =Todo.new%>
+      <%= form_for(@todo,  url:'/todocreate') do |f| %>
+	<%=f.select :project_id,options_for_select(Project.all.collect{ |u| [u.title,u.id]})  %>
+        <%= f.text_field :text,placeholder: 'Название задачи' %>
+<label>
+задача выполнена?
+        <%= f.check_box :isCompleted %>
+</label>    
+	
+	 <%= link_to "OK", '#', id: "li"%>
+	
+    <a href="#" id="formout">Отмена</a>  &nbsp;&nbsp
+		
+
+
+    <% end %>
+  </div>
+
+</div>
+
+
+
+  

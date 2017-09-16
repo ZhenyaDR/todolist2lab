@@ -1,0 +1,19 @@
+﻿<% provide(:title, 'задачи') %>
+<style>
+
+</style>
+<div class="login-page">
+  <div class="form">
+    <p style="color:black; font-size:14px ">Добавления задачи в проект</p>
+      <%= form_for(@todo,  url:"/todoupdate#{(@todo.id)}") do |f| %>
+	<%=f.select :project_id,options_for_select(Project.all.collect{ |u| [u.title,u.id]},selected:@todo.project_id)  %>
+        <%= f.text_field :text,placeholder: 'Названия задачи' %>
+<label style='color:black'>
+задача выполнен
+        <%= f.check_box :isCompleted %>
+</label>
+        <%= f.submit 'Редактировать', class: "button" %>
+    <% end %>
+  </div>
+  
+</div>
